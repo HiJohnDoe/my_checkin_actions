@@ -1,4 +1,4 @@
-name: 刷步数
+name: 小米刷步数
 
 on:
   workflow_dispatch:
