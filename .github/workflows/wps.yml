@@ -24,7 +24,7 @@ jobs:
         run: cd wps
         
       - name: "安装依赖包"
-        run: pip install -r ./requirements.txt
+        run: pip install -r requirements.txt
 
       - name: "运行 WPS自动邀请"
         run: python3 wps_invitation.py
