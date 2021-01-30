@@ -20,11 +20,10 @@ jobs:
         with:
           python-version: 3.8
 
-      - name: "进入文件夹"
-        run: cd wps
-        
       - name: "安装依赖包"
-        run: pip install -r requirements.txt
+        run: |
+          cd wps
+          pip install -r requirements.txt
 
       - name: "运行 WPS自动邀请"
         run: python3 wps_invitation.py
