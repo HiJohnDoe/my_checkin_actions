@@ -20,10 +20,6 @@ jobs:
       run: |
         sudo apt update && \
         sudo apt install python3
-            
-    - name: "进入文件夹"
-      run: |
-        cd 189cloud
         
     - name: "安装依赖包"
       run: |
@@ -54,8 +50,8 @@ jobs:
         else
         echo "共有 $user_num 个账号，即将开始签到"
         fi
+        cd 189cloud
         for ((i=0;i<$user_num;i++))
         do
-        cd 189cloud
         python3 189cloud.py --username ${user_list[$i]} --password ${pwd_list[$i]}
         done
