@@ -23,7 +23,7 @@ jobs:
         run: python -m pip install --upgrade requests
       - name: 'Start Sign'
         env:
-          BDUSS: ${{ secrets.BDUSS }}
+          BDUSS: ${{ secrets.TIEBA_BDUSS }}
         run: | 
           cd tieba
           python tieba.py
