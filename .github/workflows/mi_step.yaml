@@ -44,12 +44,7 @@ jobs:
         do
         pwd_list[${#pwd_list[*]}]=${p}
         done
-        
-        for s in ${sckey[*]}
-        do
-        sckey_list[${#sckey_list[*]}]=${s}
-        done
-        
+
         for t in ${step[*]}
         do
         step_list[${#step_list[*]}]=${t}
@@ -66,7 +61,7 @@ jobs:
         fi
         for ((i=0;i<$user_num;i++))
         do
-        python3 xiaomi_steps.py --username ${user_list[$i]} --password ${pwd_list[$i]} --steps ${step_list[$i]} --pushkey ${sckey_list[$i]}
+        python3 xiaomi_steps.py --username ${user_list[$i]} --password ${pwd_list[$i]} --steps ${step_list[$i]} --pushkey ${sckey}
         done
         # python3 xiaomi_steps.py <<EOF
         # ${sckey}
