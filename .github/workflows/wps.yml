@@ -32,7 +32,7 @@ jobs:
         env:
           WPS_KEY: ${{ secrets.WPS_KEY }}
           SEND_KEY: ${{ secrets.SEND_KEY }}
-          PUSH_KEY: ${{ secrets.WPS_SCKEY  }}
+          PUSH_KEY: ${{ secrets.SCKEY  }}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
           QQ_SKEY: ${{ secrets.QQ_SKEY}}
           QQ_MODE: ${{ secrets.QQ_MODE}}
