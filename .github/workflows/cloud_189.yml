@@ -21,15 +21,15 @@ jobs:
         sudo apt update && \
         sudo apt install python3
             
-    - name: get in dir
+    - name: "进入文件夹"
       run: |
         cd 189cloud
         
-    - name: requirements
+    - name: "安装依赖包"
       run: |
         pip3 install -r requirements.txt
         
-    - name: Checkin
+    - name: "运行 天翼云签到"
       run: |
         user='${{ secrets.CLOUD_189_USER }}'
         pwd='${{ secrets.CLOUD_189_PWD }}'
