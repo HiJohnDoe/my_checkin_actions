@@ -1,5 +1,2 @@
 pycryptodome
 requests
-rsa
-pytz
-python-dateutil
