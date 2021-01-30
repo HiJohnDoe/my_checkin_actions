@@ -12,7 +12,7 @@ namespace Note163Checkin
 
         static async Task Main(string[] args)
         {
-            _conf = Deserialize<Conf>(GetEnvValue("CONF"));
+            _conf = Deserialize<Conf>(GetEnvValue("NOTE_163_CONF"));
             if (!string.IsNullOrWhiteSpace(_conf.ScKey))
             {
                 _scClient = new HttpClient();
