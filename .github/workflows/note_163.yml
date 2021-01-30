@@ -16,7 +16,6 @@ jobs:
     - uses: actions/checkout@main
     - name: Wait
       run: |
-        cd Note163Checkin
         random_time=1
         echo "等待 ${random_time} 分钟后开始执行"
         for((i=1;i<=${random_time};i++));  
@@ -29,6 +28,8 @@ jobs:
       with:
         dotnet-version: '3.1.x' # SDK Version to use; x will use the latest version of the 3.1 channel
     - name: Run
-      run: dotnet run
+      run: |
+        cd Note163Checkin
+        dotnet run
       env: 
         CONF: ${{ secrets.NOTE_163_CONF }}
