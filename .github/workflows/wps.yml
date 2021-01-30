@@ -26,7 +26,9 @@ jobs:
           pip install -r requirements.txt
 
       - name: "运行 WPS自动邀请"
-        run: python3 wps_invitation.py
+        run: |
+          cd wps
+          python3 wps_invitation.py
         env:
           WPS_KEY: ${{ secrets.WPS_KEY }}
           SEND_KEY: ${{ secrets.SEND_KEY }}
