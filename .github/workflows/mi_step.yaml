@@ -24,7 +24,7 @@ jobs:
       run: |
         cd mistep
         pip install requests
-        sckey='${{ secrets.MI_SCKEY }}'
+        sckey='${{ secrets.SCKEY }}'
         user='${{ secrets.MI_USER }}'
         pwd='${{ secrets.MI_PWD }}'
         step='${{ secrets.MI_STEP }}'
