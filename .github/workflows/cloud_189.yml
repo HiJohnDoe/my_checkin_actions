@@ -27,6 +27,7 @@ jobs:
         
     - name: "安装依赖包"
       run: |
+        cd 189cloud
         pip3 install -r requirements.txt
         
     - name: "运行 天翼云签到"
@@ -55,5 +56,6 @@ jobs:
         fi
         for ((i=0;i<$user_num;i++))
         do
+        cd 189cloud
         python3 189cloud.py --username ${user_list[$i]} --password ${pwd_list[$i]}
         done
