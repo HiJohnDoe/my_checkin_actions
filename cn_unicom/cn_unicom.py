@@ -50,8 +50,8 @@ class Qiandao():
             print("cant get cookies")
         data2={'stepflag':'22'}
         data2=urllib.parse.urlencode(data2).encode('utf-8')
-        
-        req3 = urllib2.Request("https://act.10010.com/SigninApp/signin/querySigninActivity.htm?token=" + a)
+        b = "https://act.10010.com/SigninApp/signin/querySigninActivity.htm?token=" + a
+        req3 = urllib2.Request(b)
         if urllib2.urlopen(req3).getcode() == 200:
             print('querySigninActivity success!')
         
