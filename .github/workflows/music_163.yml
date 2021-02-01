@@ -19,10 +19,12 @@ jobs:
     steps:
       - name: "签入仓库"
         uses: actions/checkout@v2
+
       - name: "初始化Python"
         uses: actions/setup-python@v2
         with:
           python-version: 3.7
+          
       - name: "运行 网易云音乐签到"
         run: |
           cd music_163
