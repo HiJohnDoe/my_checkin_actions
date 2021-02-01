@@ -6,8 +6,8 @@
 3.可在脚本内直接填写账号密码  
 4.Python 和需要模块都装好了直接在目录 cmd 运行所要运行的脚本。  
 
-***源代码来自：https://github.com/t00t00-crypto/cloud189-action.git，仅做了一些修改***  
-***源代码来自：https://51.ruyo.net/16050.html，仅做了一些修改***  
+***源代码来自：https://github.com/t00t00-crypto/cloud189-action.git*** ，仅做了一些修改   
+***源代码来自：https://51.ruyo.net/16050.html*** ，仅做了一些修改
 
 # Github Actions 部署指南
 ## 一、代码
