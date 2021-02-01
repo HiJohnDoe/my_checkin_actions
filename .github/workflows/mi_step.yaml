@@ -65,7 +65,6 @@ jobs:
           for ((i=0;i<$user_num;i++))
           do
           python3 xiaomi_steps.py --username ${user_list[$i]} --password ${pwd_list[$i]} --steps ${step_list[$i]} --pushkey ${sckey}
-          EOF
           done
           # python3 xiaomi_steps.py <<EOF
           # ${sckey}
