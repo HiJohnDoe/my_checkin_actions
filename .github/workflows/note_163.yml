@@ -24,7 +24,7 @@ jobs:
       run: |
         pip3 install requests
         
-    - name: Checkin
+    - name: 签到
       run: |
         cd note_163
         user='${{ secrets.NOTE_163_USER }}'
