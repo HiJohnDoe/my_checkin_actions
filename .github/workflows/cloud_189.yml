@@ -23,7 +23,7 @@ jobs:
         
     - name: "安装依赖包"
       run: |
-        cd 189cloud
+        cd cloud_189
         pip3 install -r requirements.txt
         
     - name: "运行 天翼云签到"
@@ -50,8 +50,8 @@ jobs:
         else
         echo "共有 $user_num 个账号，即将开始签到"
         fi
-        cd 189cloud
+        cd cloud_189
         for ((i=0;i<$user_num;i++))
         do
-        python3 189cloud.py --username ${user_list[$i]} --password ${pwd_list[$i]}
+        python3 cloud_189.py --username ${user_list[$i]} --password ${pwd_list[$i]}
         done
