@@ -42,8 +42,10 @@ class Qiandao():
         if req2.getcode() == 200:
             print('login success!')
         try:
+            print("try get a_token")
             for item1 in self.cookie:
                 if item1.name == 'a_token':
+                    print("get a_token")
                     b = item1.value
                     a = b
         except:
