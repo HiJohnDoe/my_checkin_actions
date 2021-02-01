@@ -24,9 +24,9 @@ github action 执行代码为：.github/workflows/note_163.yml
 ![](http://tu.yaohuo.me/imgs/2020/06/34ca160c972b9927.png)
 
 ## 四、查看运行结果
-Actions > note163Checkin > build  
+Actions > 有道云笔记签到 > build  
 能看到如下图所示，表示成功  
 ![](http://note.youdao.com/yws/public/resource/17edb8861d2106a5c39ec94d91919150/xmlnote/48958A4994D64C20867281B67B7CDAFD/1059)
 
 此后，将会在北京时间每天上午9:00签到一次  
-若有需求，可以在[.github/workflows/main.yml]中自行修改
+若有需求，可以在[.github/workflows/note163.yml]中自行修改

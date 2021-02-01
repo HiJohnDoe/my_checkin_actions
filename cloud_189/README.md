@@ -7,14 +7,15 @@
 4.Python 和需要模块都装好了直接在目录 cmd 运行所要运行的脚本。  
 
 
-# Github Actions说明
-## 一、Fork此仓库
-![](http://tu.yaohuo.me/imgs/2020/06/f059fe73afb4ef5f.png)
-## 二、设置账号密码
-添加名为**USER**、**PWD**的变量  
+# Github Actions 部署指南
+## 一、代码
+签到代码为：cloud_189/cloud_189.py  
+github action 执行代码为：.github/workflows/cloud_189.yml
+## 二、设置账号密码的secrets
+添加名为**CLOUD_189_USER**、**CLOUD_189_PWD**的secrets  
 值分别为**账号**、**密码**  
 支持多账号，账号之间与密码之间用**半角逗号**分隔，账号于密码的个数要对应  
-示例：**USER:123456,24678**，**PWD:cxkjntm,jntmcxk**
+示例：**CLOUD_189_USER:123456,24678**，**CLOUD_189_PWD:cxkjntm,jntmcxk**
 ![](http://tu.yaohuo.me/imgs/2020/06/748bf9c0ca6143cd.png)
 
 ## 三、启用Action
@@ -23,9 +24,9 @@
 ![](http://tu.yaohuo.me/imgs/2020/06/34ca160c972b9927.png)
 
 ## 四、查看运行结果
-Actions > Cloud189Checkin > build  
+Actions > 天翼云签到 > build  
 能看到如下图所示，表示成功  
 ![](http://tu.yaohuo.me/imgs/2020/06/b9e596c99f3835e0.png)
 
 此后，将会在每天10:00和22:00各签到一次  
-若有需求，可以在[.github/workflows/check-in.yml]中自行修改
+若有需求，可以在[.github/workflows/cloud_189.yml]中自行修改
