@@ -6,10 +6,13 @@
 3.可在脚本内直接填写账号密码  
 4.Python 和需要模块都装好了直接在目录 cmd 运行所要运行的脚本。  
 
+***源代码来自：https://github.com/t00t00-crypto/cloud189-action.git，仅做了一些修改***
+***源代码来自：https://51.ruyo.net/16050.html，仅做了一些修改***
 
 # Github Actions 部署指南
 ## 一、代码
 签到代码为：cloud_189/cloud_189.py  
+依赖为：cloud_189/requirements.txt  
 github action 执行代码为：.github/workflows/cloud_189.yml
 ## 二、设置账号密码的secrets
 添加名为**CLOUD_189_USER**、**CLOUD_189_PWD**的secrets  
