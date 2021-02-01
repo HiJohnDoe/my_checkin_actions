@@ -23,7 +23,6 @@ class Qiandao():
 
 
     def sign(self,data):
-        global a
         headers = {
             'Host': 'm.client.10010.com',
             'Accept': '*/*',
@@ -38,12 +37,15 @@ class Qiandao():
         data = data.encode('utf-8')
         req2 = urllib2.Request("http://m.client.10010.com/mobileService/login.htm",headers=headers)
         req2 = urllib2.urlopen(req2,data)
+        global a
+        global b
         if req2.getcode() == 200:
             print('login success!')
         try:
             for item1 in self.cookie:
                 if item1.name == 'a_token':
-                    a = item1.value
+                    b = item1.value
+                    a = b
         except:
             print("cant get cookies")
         data2={'stepflag':'22'}
