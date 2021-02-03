@@ -3,4 +3,4 @@
 配置：  
 | secrets | content |              detail                    |
 |---------|---------|----------------------------------------|
-| WPS_KEY	| WPS_SID	| WPS COOKIE中的wps_sid,只要不注销,10年过期|
+| WPS_KEY	| WPS_SID	| http://zt.wps.cn COOKIE中的wps_sid,只要不注销,10年过期|
