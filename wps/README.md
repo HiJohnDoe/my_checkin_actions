@@ -6,9 +6,9 @@
 ![WPS自动邀请](https://github.com/HiJohnDoe/my_checkin_actions/workflows/WPS%E8%87%AA%E5%8A%A8%E9%82%80%E8%AF%B7/badge.svg)
 
 ## 目前暂时能用
-python源码copy于[wps_invitation.py](https://github.com/BlueskyClouds/My-Actions/blob/master/function/wps_invitation.py)
-
-
+python源码copy于[wps_invitation.py](https://github.com/BlueskyClouds/My-Actions/blob/master/function/wps_invitation.py)  
+  
+  
 # Github Actions说明  
 ## 一、代码  
 程序代码为：[wps_invitation.py](./wps_invitation.py)  
