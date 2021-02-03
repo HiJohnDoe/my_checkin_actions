@@ -13,7 +13,7 @@ Detail:
 |                       | music_163         |  https://music.163.com/ , NetEase CloudMusic auto check in, level up by listening 300+ songs every day |
 |                       | note_163          |  http://note.youdao.com/ , NetEase youdao notebook auto check in,  get free space               |
 |                       | tieba             |  https://tieba.baidu.com/index.html , Baidu Tieba auto check in,  level up by check in bars     |
-|                       | wps               |  https://www.wps.cn/ , Kingsoft Office, auto check in,  get free VIP by invite other users      |
+|                       | wps               |  https://www.wps.cn/ , Kingsoft Office,  get free VIP by inviting other users      |
 
 Time schedule:
 |    Type           |         Crontab        |       UTC+0         |  Beijing time : UTC+8    |
