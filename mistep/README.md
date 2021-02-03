@@ -5,9 +5,6 @@ source from: https://github.com/Squaregentleman/mimotion.git
 ## 今日签到状态  
 ![小米刷步数](https://github.com/HiJohnDoe/my_checkin_actions/workflows/%E5%B0%8F%E7%B1%B3%E5%88%B7%E6%AD%A5%E6%95%B0/badge.svg)  
 
-
-> 小米运动自动刷步数
-
 ## Github Actions 部署指南
 
 ### 一、Fork 此仓库
