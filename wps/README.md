@@ -7,7 +7,7 @@
 
 
 ## 目前暂时能用
-python源码copy于[wps_invitation.py].(https://github.com/BlueskyClouds/My-Actions/blob/master/function/wps_invitation.py)
+python源码copy于[wps_invitation.py](https://github.com/BlueskyClouds/My-Actions/blob/master/function/wps_invitation.py)
 
 
 
