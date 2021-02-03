@@ -20,12 +20,13 @@ Github Action 执行代码为：[wps.yml](../.github/workflows/wps.yml)
 | secrets | content |              detail                    |
 |---------|---------|----------------------------------------|
 | WPS_KEY	| WPS_SID	| http://zt.wps.cn COOKIE中的wps_sid,只要不注销,10年过期|  
-*不支持多账号  
+ 
+*不支持多账号*  
 
 ### 三、启用Action  
 1 点击**Action**，再点击**I understand my workflows, go ahead and enable them**  
 2 修改任意文件后提交一次  
 ![](http://tu.yaohuo.me/imgs/2020/06/34ca160c972b9927.png)
 
-*若有需求，可以在[wps.yml](../.github/workflows/wps.yml)中自行修改
+*若有需求，可以在[wps.yml](../.github/workflows/wps.yml)中自行修改*
 
