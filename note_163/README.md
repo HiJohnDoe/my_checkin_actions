@@ -1,5 +1,11 @@
 # note163checkin
 代码复制的别人的，我只是稍作修改，不能用了我也不会修
+
+## 今日签到状态
+
+![有道云笔记签到](https://github.com/HiJohnDoe/my_checkin_actions/workflows/%E6%9C%89%E9%81%93%E4%BA%91%E7%AC%94%E8%AE%B0%E7%AD%BE%E5%88%B0/badge.svg)
+
+
 ## 目前暂时能用
 仓库源码 https://github.com/jsk18/note163checkin.git  
 python源码copy于(https://github.com/lepecoder/checkin)
