@@ -1,6 +1,10 @@
 # 网易云音乐自动签到 + 刷歌
 > 网易云音乐自动登录签到 + 刷歌 310 首
 
+## 今日签到状态
+
+![网易云音乐签到](https://github.com/HiJohnDoe/my_checkin_actions/workflows/%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90%E7%AD%BE%E5%88%B0/badge.svg)
+
 ## Github Actions 部署指南
 ## 一、代码
 签到代码为：music_163/music_163.py  
