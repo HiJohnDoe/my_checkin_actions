@@ -5,7 +5,7 @@
 
 ## 今日签到状态
 
-![Baidu Tieba Auto Sign](https://github.com/ghosx/tieba/workflows/Baidu%20Tieba%20Auto%20Sign/badge.svg)
+![百度贴吧签到](https://github.com/HiJohnDoe/my_checkin_actions/workflows/%E7%99%BE%E5%BA%A6%E8%B4%B4%E5%90%A7%E7%AD%BE%E5%88%B0/badge.svg)
 
 ## 使用说明
 
