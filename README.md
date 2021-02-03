@@ -23,5 +23,5 @@ Time schedule:
 |     music_163     |       '0 22,14 * * *'  |  every 22:00 14:00  |    every 6:00 22:00      |
 |     note_163      |       '0 1 * * *'      |  every 1:00         |    every 9:00            |
 |     tieba         |       '5 16,22 * * *'  |  every 16:05 22:05  |    every 0:05 6:05       |
-|     wps           |       '45 0,2 * * *'   |  every 0:45 2:45    |    every 8:45 10:45      |
+|     wps           |       '45 23,1 * * *'   |  every 23:45 1:45    |    every 7:45 9:45      |
 
