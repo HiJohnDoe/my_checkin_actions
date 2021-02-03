@@ -1,4 +1,8 @@
-# 天翼云自动签到
+# 天翼云自动签到  
+## 今日签到状态  
+![天翼云签到](https://github.com/HiJohnDoe/my_checkin_actions/workflows/%E5%A4%A9%E7%BF%BC%E4%BA%91%E7%AD%BE%E5%88%B0/badge.svg)  
+
+
 天翼云盘每日签到一次，抽奖2次  
 使用方法  
 1.测试环境为python3.7.6,自行安装python3  
