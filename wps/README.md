@@ -9,12 +9,12 @@
 ## 目前暂时能用
 python源码copy于(https://github.com/BlueskyClouds/My-Actions/blob/master/function/wps_invitation.py)
 
-##下面的说明也是复制的别人项目的
+
 
 # Github Actions说明
 ## 一、代码
-签到代码为：wps/wps_invitation.py  
-github action 执行代码为：.github/workflows/wps.yml
+程序代码为：wps/wps_invitation.py  
+Github Action 执行代码为：.github/workflows/wps.yml
 ## 二、设置账号密码的secrets
 添加名为**WPS_KEY**的secrets  
 配置：  
