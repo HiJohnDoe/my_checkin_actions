@@ -26,6 +26,9 @@ jobs:
           pip install -r requirements.txt
 
       - name: "运行 WPS自动邀请"
+        run: |
+          cd wps
+          python3 wps_invitation.py
         env:
           WPS_KEY: ${{ secrets.WPS_KEY }}
           SEND_KEY: ${{ secrets.SEND_KEY }}
@@ -38,6 +41,3 @@ jobs:
           BARK_SOUND: ${{ secrets.BARK_SOUND }}
           DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
           DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
-        run: |
-          cd wps
-          python3 wps_invitation.py
