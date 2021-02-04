@@ -566,7 +566,7 @@ def wps_massing_group(sid):
             code = resp1['data']['latest_record']['code']
             sio.write("开团成功, code: " + code +'\n\n')
         else:
-            sio.write(resp['msg'] +'\n\n')
+            sio.write(resp['result'] +'\n\n')
     return code
 
 #wps会员群集结参团
