@@ -1,11 +1,5 @@
 > 中国联通APP登录 签到 金币 任务 解流量封顶  
 新增使用github自动运行，无需自己的服务器
-
-source from:  
-1. https://github.com/hzys/HiCnUnicom.git  
-2. https://github.com/mixool/HiCnUnicom.git  
-
-
 ## 使用方法
 
 ### 1.Fork 本仓库

@@ -1,3 +1,4 @@
+
 # coding=utf-8
 # author:@QiuYueBai
 
@@ -23,6 +24,7 @@ class Qiandao():
 
 
     def sign(self,data):
+        global a
         headers = {
             'Host': 'm.client.10010.com',
             'Accept': '*/*',
@@ -37,23 +39,18 @@ class Qiandao():
         data = data.encode('utf-8')
         req2 = urllib2.Request("http://m.client.10010.com/mobileService/login.htm",headers=headers)
         req2 = urllib2.urlopen(req2,data)
-        global a
-        global b
         if req2.getcode() == 200:
             print('login success!')
         try:
-            print("try get a_token")
             for item1 in self.cookie:
                 if item1.name == 'a_token':
-                    print("get a_token")
-                    b = item1.value
-                    a = b
+                    a = item1.value
         except:
             print("cant get cookies")
         data2={'stepflag':'22'}
         data2=urllib.parse.urlencode(data2).encode('utf-8')
-        b = "https://act.10010.com/SigninApp/signin/querySigninActivity.htm?token=" + a
-        req3 = urllib2.Request(b)
+        
+        req3 = urllib2.Request("https://act.10010.com/SigninApp/signin/querySigninActivity.htm?token=" + a)
         if urllib2.urlopen(req3).getcode() == 200:
             print('querySigninActivity success!')
         
@@ -80,6 +77,7 @@ if __name__ == '__main__':
 
     timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-    data = timestamp+sys.argv[1]
+    data = timestamp+"这部分自己按要求抓包提取"
 
     user.sign(data)
+
