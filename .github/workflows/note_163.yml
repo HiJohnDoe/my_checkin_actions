@@ -2,6 +2,10 @@ name: 有道云笔记签到
 
 on:
   workflow_dispatch:
+#   push:
+#     branches: [ main ]
+#   pull_request:
+#     branches: [ main ]
 #   watch:
 #     types: [started]
   schedule:

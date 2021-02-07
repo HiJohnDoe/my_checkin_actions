@@ -2,11 +2,12 @@ name: 联通营业厅签到领积分
 
 on:
   workflow_dispatch:
-  # push:
-  #   branches: 
-  #     - master
-  # watch:
-  #   types: started
+#   push:
+#     branches: [ main ]
+#   pull_request:
+#     branches: [ main ]
+#   watch:
+#     types: [started]
   schedule:
     - cron: 15 22 * * *
 

@@ -3,9 +3,11 @@ name: 天翼云签到
 on:
   workflow_dispatch:
 #   push:
-#     branches: [ master ]
+#     branches: [ main ]
 #   pull_request:
-#     branches: [ master ]
+#     branches: [ main ]
+#   watch:
+#     types: [started]
   schedule:
     - cron: 0 2,14 * * *
 
