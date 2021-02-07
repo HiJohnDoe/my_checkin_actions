@@ -31,7 +31,7 @@ jobs:
            
     #设置PARAMETER的值为脚本支持的参数,如 membercenter 13800008888@112233 18388880000@123456
  
-      - name: 运行号码签到
+      - name: 联通营业厅签到领积分
         env:
           PARAMETER: ${{ secrets.CN_UNICOM_COOKIE }}
         run: |
