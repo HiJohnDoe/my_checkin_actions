@@ -47,19 +47,21 @@ invite_limit = 10
 mass_limit = 5
 # 这13个账号被邀请,且参与WPS会员群集结,如群集结失败, 请修改以下sid, 修改时注意保留双引号
 invite_sid = [
-    "V02SfEpW1yy4wUUh_eEnEHpiJJuoDnE00ae12710000179aa7f",
-    "V02SWIvKWYijG6Rggo4m0xvDKj1m7ew00a8e26d3002508b828",
-    "V02Sr3nJ9IicoHWfeyQLiXgvrRpje6E00a240b890023270f97",
-    "V02SBsNOf4sJZNFo4jOHdgHg7-2Tn1s00a338776000b669579",
-    "V02S2oI49T-Jp0_zJKZ5U38dIUSIl8Q00aa679530026780e96",
-    "V02ShotJqqiWyubCX0VWTlcbgcHqtSQ00a45564e002678124c",
-    "V02SFiqdXRGnH5oAV2FmDDulZyGDL3M00a61660c0026781be1",
-    "V02S7tldy5ltYcikCzJ8PJQDSy_ElEs00a327c3c0026782526",
-    "V02SPoOluAnWda0dTBYTXpdetS97tyI00a16135e002684bb5c",
-    "V02Sb8gxW2inr6IDYrdHK_ywJnayd6s00ab7472b0026849b17",
-    "V02SwV15KQ_8n6brU98_2kLnnFUDUOw00adf3fda0026934a7f",
-    "V02SC1mOHS0RiUBxeoA8NTliH2h2NGc00a803c35002693584d",
-    "V02S2UBSfNlvEprMOn70qP3jHPDqiZU00a7ef4a800341c7c3b"
+        "V02SC1mOHS0RiUBxeoA8NTliH2h2NGc00a803c35002693584d",
+        "V02S2UBSfNlvEprMOn70qP3jHPDqiZU00a7ef4a800341c7c3b",
+        "V02StVuaNcoKrZ3BuvJQ1FcFS_xnG2k00af250d4002664c02f",
+        "V02SWIvKWYijG6Rggo4m0xvDKj1m7ew00a8e26d3002508b828",
+        "V02Sr3nJ9IicoHWfeyQLiXgvrRpje6E00a240b890023270f97",
+        "V02SBsNOf4sJZNFo4jOHdgHg7-2Tn1s00a338776000b669579",
+        "V02ScVbtm2pQD49ArcgGLv360iqQFLs014c8062e000b6c37b6",
+        "V02S2oI49T-Jp0_zJKZ5U38dIUSIl8Q00aa679530026780e96",
+        "V02ShotJqqiWyubCX0VWTlcbgcHqtSQ00a45564e002678124c",
+        "V02SFiqdXRGnH5oAV2FmDDulZyGDL3M00a61660c0026781be1",
+        "V02S7tldy5ltYcikCzJ8PJQDSy_ElEs00a327c3c0026782526",
+        "V02SPoOluAnWda0dTBYTXpdetS97tyI00a16135e002684bb5c",
+        "V02Sb8gxW2inr6IDYrdHK_ywJnayd6s00ab7472b0026849b17",
+        "V02SwV15KQ_8n6brU98_2kLnnFUDUOw00adf3fda0026934a7f",
+        "V02SBpDdos7QiFOs_5TOLF0a80pWt-U00a94ce2c003a814a17",
 ]
 
 # 初始化日志
@@ -77,8 +79,6 @@ def main():
 
     for item in sid:
         sio.write("---为{}签到---↓\n\n".format(item['name']))
-
-        # wps网页签到
         b0 = wps_webpage_clockin(item['sid'])
         if b0 == 1:
             # 获取当前网页签到信息
@@ -86,7 +86,6 @@ def main():
             r = s.post(taskcenter_url, headers={'sid': item['sid']})
             resp = json.loads(r.text)
             if resp['data']['taskNum'] < 12:
-                # wps网页任务提示
                 wps_webpage_taskreward(item['sid'])
             r = s.post(taskcenter_url, headers={'sid': item['sid']})
             resp = json.loads(r.text)
@@ -98,8 +97,6 @@ def main():
             sendNotify.send(title = "Wps签到信息",msg = desp)
             print(desp)
             return desp
-
-        # Docer网页签到
         b1 = docer_webpage_clockin(item['sid'])
         if b1 == 1:
             checinRecord_url = 'https://zt.wps.cn/2018/docer_check_in/api/checkin_record'
@@ -112,13 +109,10 @@ def main():
             sio.write('拥有补签卡: {}张\n\n'.format(resp1['data']))
             max_days = resp['data']['max_days']
             if resp1['data'] > 0 and len(resp['data']['records'])>0:
-                # Docer网页补签
                 max_days = docer_webpage_earlyclockin(item['sid'],resp1['data'],resp['data']['records'],max_days)
             if len(resp['data']['records'])>0:
-                # Docer网页领取礼物
                 docer_webpage_giftReceive(item['sid'],max_days)
 
-        # wps小程序签到
         b2 = wps_miniprogram_clockin(item['sid'])
         if b2 == 1:
             # 获取小程序当前会员奖励信息
@@ -140,38 +134,17 @@ def main():
             sio.write('会员信息:\n\n')
             for i in range(len(resp['data']['vip']['enabled'])):
                 sio.write('"类型":{}, "过期时间":{}\n\n'.format(resp['data']['vip']['enabled'][i]['name'],datetime.datetime.fromtimestamp(resp['data']['vip']['enabled'][i]['expire_time']).strftime("%Y--%m--%d %H:%M:%S")))
-    
-    
     # wps签到邀请
     sio.write("\n\n          ==========wps邀请==========\n\n")
     for item in sid:
         sio.write("---为{}邀请---↓\n\n".format(item['name']))
         if type(resp['data']['userid']) == int:
-            # wps小程序接受邀请
             wps_miniprogram_invite(invite_sid, resp['data']['userid'])
         else:
             sio.write("邀请失败: 用户ID错误, 请检查用户sid\n\n")
 
-    sio.write("\n\n          ==========wps会员群集结==========\n\n")
-    for item in sid:
-        sio.write("---为{}会员进行群集结---↓\n\n".format(item['name']))
-        # wps会员群集结信息
-        time = wps_massing_info(item['sid'],0)
-        if time < 3:
-            # wps会员群集结开团
-            code = wps_massing_group(item['sid'])
-            if code:
-                # wps会员群集结参团
-                k = wps_massing_join(code, invite_sid)
-                if k < 5:
-                    sio.write("当前集结{}人, 未达到集结要求!!!\n\n".format(k))
-            # wps会员群集结信息
-            wps_massing_info(item['sid'],1)
-        else:
-            # wps会员群集结信息
-            wps_massing_info(item['sid'],1)
     desp = sio.getvalue()
-    sendNotify.send(title = "Wps签到集结",msg = desp)
+    sendNotify.send(title = "Wps签到邀请",msg = desp)
     print(desp)
     return desp
 
@@ -287,7 +260,6 @@ def wps_webpage_taskreward(sid: str):
                  resp['data']['3']['task']])
     statustask = 1
     for i in range(len(resplist)):
-        # 检查wps网页任务提示信息
         checkinformation(resplist[i],sid)
 
 # 检查wps网页任务提示信息
@@ -521,6 +493,7 @@ def wps_miniprogram_invite(sid: list, invite_userid: int) -> None:
     invite_url = 'http://zt.wps.cn/2018/clock_in/api/invite'
     k = 0
     for index, i in enumerate(sid):
+        time.sleep(5)
         if k < invite_limit:
             headers = {
                 'sid': i
@@ -539,105 +512,6 @@ def wps_miniprogram_invite(sid: list, invite_userid: int) -> None:
                 sio.write("邀请对象ID={}, 状态码: {},\n\n  请求信息{}\n\n".format(str(index+1).zfill(2), r.status_code, r.text[:25]))
     return k
 
-# wps会员群集结
-# 活动地址: WPS会员公众号-福利签到-打卡免费领会员-群集结
-# 奖励: 集结成功3次,获得6天会员+10M空间
-# 运行方法: 获取sid,填入,就可以了
-# 注意: 不要手动开团
-#      最好换4个自己小号的sid,默认的可能用的人多就没次数了
-def wps_massing(*args):
-    sid = data['wps_checkin']
-    sio.write("\n\n          ==========wps会员群集结==========\n\n")
-    for item in sid:
-        sio.write("---为{}会员进行群集结---↓\n\n".format(item['name']))
-        # wps会员群集结信息
-        time = wps_massing_info(item['sid'],0)
-        if time < 3:
-            # wps会员群集结开团
-            code = wps_massing_group(item['sid'])
-            if code:
-                # wps会员群集结参团
-                k = wps_massing_join(code, invite_sid)
-                if k < 5:
-                    sio.write("当前集结{}人, 未达到集结要求!!!\n\n".format(k))
-            # wps会员群集结信息
-            wps_massing_info(item['sid'],1)
-        else:
-            # wps会员群集结信息
-            wps_massing_info(item['sid'],1)
-    desp = sio.getvalue()
-    sendNotify.send(title = "Wps签到集结",msg = desp)
-    print(desp)
-    return desp
-
-# wps会员群集结开团
-def wps_massing_group(sid):
-    massing_url = 'https://zt.wps.cn/2020/massing/api'
-    r = s.post(massing_url, headers={'sid': sid})
-    resp = json.loads(r.text)
-    code = ''
-    if resp['result'] == "error" and resp['msg'] == "up to limit":
-        sio.write("今日集结次数已达到上限,请明日再来\n\n")
-    elif resp['data'] and resp['data']['code']:
-        code = resp['data']['code']
-        sio.write("开团成功, code: " + code +'\n\n')
-    else:
-        r1 = s.get(massing_url, headers={'sid': sid})
-        resp1 = json.loads(r1.text)
-        if 'latest_record' in resp1['data']:
-            code = resp1['data']['latest_record']['code']
-            sio.write("开团成功, code: " + code +'\n\n')
-        else:
-            sio.write(resp['result'] +'\n\n')
-    return code
-
-# wps会员群集结参团
-def wps_massing_join(code, sid):
-    massing_url = 'https://zt.wps.cn/2020/massing/api'
-    k = 1
-    for index, i in enumerate(sid):
-        if k < mass_limit:
-            headers = {
-                'sid': i
-            }
-            r = s.post(massing_url, data = {'code':code}, headers = headers)
-            if r.status_code == 200:
-                try:
-                    resp = json.loads(r.text)
-                    if resp['result'] == 'error':
-                        sio.write("参团对象ID={}, Result: {}\n\n".format(str(index+1).zfill(2),resp['msg']))
-                    elif resp['result'] == 'ok':
-                        sio.write("参团对象ID={}, Result: {}\n\n".format(str(index+1).zfill(2),resp['result']))
-                        k += 1
-                except:
-                    resp = r.text[:25]
-                    sio.write("参团对象ID={}, Result: ID已失效\n\n".format(str(index+1).zfill(2)))
-            else:
-                sio.write("参团对象ID={}, 状态码: {},\n\n  请求信息: {}\n\n".format(str(index+1).zfill(2), r.status_code, r.text[:25]))
-        else:
-            break
-    return k
-
-# wps会员群集结信息
-def wps_massing_info(sid,c):
-    massing_url = 'https://zt.wps.cn/2020/massing/api'
-    r = s.get(massing_url, headers={'sid': sid})
-    resp = json.loads(r.text)
-    time = 0
-    if resp['result'] == "ok" and resp['data'] and resp['data']['reward']:
-        reward = resp['data']['reward']
-        time = reward['time']
-        if time != 0 and c == 1:
-            sio.write('今日集结'+ str(reward['time']) +'次,共集结'+ str(reward['total_time']) +'次;\n\n获得'+ str(reward['member']) +'天会员,'+ str(reward['drive']) +'M空间\n\n')
-        if 'latest_record' in resp['data'] and c == 1:
-            create_time = resp['data']['latest_record']['create_time']
-            ts2str_url = 'https://api.a76yyyy.cn/time?function=timestamp2str'
-            r1 = s.post(ts2str_url, data = {'params1':str(int(create_time)+1800)})
-            resp1 = json.loads(r1.text)
-            sio.write("当前集结中, 下次开团时间:" + resp1['data'] + '\n\n')
-    else:
-        sio.write("sid已失效,请重新获取sid\n\n")
-    return time
 
 def main_handler(event, context):
     return main()
