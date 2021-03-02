@@ -24,6 +24,7 @@ jobs:
               node-version: 10.x
           - name: npm install
             run: |
+              cd iqiyi
               npm install
           - name: "运行 爱奇艺会员签到"
             run: |
