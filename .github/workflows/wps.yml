@@ -22,7 +22,7 @@ jobs:
       - name: "初始化Python"
         uses: actions/setup-python@v1
         with:
-          python-version: 3.8
+          python-version: 3.9
 
       - name: "安装依赖包"
         run: |
@@ -45,3 +45,7 @@ jobs:
           BARK_SOUND: ${{ secrets.BARK_SOUND }}
           DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
           DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
+          QYWX_AM: ${{ secrets.QYWX_AM}}
+          Orc_Id: ${{ secrets.WPS_OCR_ID}}
+          Orc_Secret: ${{ secrets.WPS_OCR_SECRET}}
+          

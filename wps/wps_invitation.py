@@ -10,7 +10,7 @@ import cv2  # 图像处理模块
 import numpy as np
 import pytz
 
-sys.path.append("my_checkin_actions/wps/")
+sys.path.append("My-my_checkin_actions/wps")
 from sendNotify import *
 
 # Python版本 3.6, 该脚本仅供分享交流和学习, 不允许用于任何非法途径, 否则后果自负, 作者对此不承担任何责任
@@ -38,13 +38,13 @@ else:
 
 # 百度文字OCR获取地址[https://console.bce.baidu.com/ai/?fromai=1#/ai/ocr/app/list]
 # 如需开启WPS微信积分签到，请获取并填写 client_id 和 client_secret
-if os.environ['WPS_OCR_ID'] != "":
-    client_id = os.environ['WPS_OCR_ID']
+if os.environ['Orc_Id'] != "":
+    client_id = os.environ['Orc_Id']
 else:
     client_id = '*********复制百度文字OCR应用的API Key进来*************(保留引号)'
 
-if os.environ['WPS_OCR_SECRET'] != "":
-    client_secret = os.environ['WPS_OCR_SECRET']
+if os.environ['Orc_Secret'] != "":
+    client_secret = os.environ['Orc_Secret']
 else:
     client_secret = '*********复制百度文字OCR应用的Secret Key进来*************(保留引号)'
 
