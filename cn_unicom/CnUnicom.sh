@@ -97,7 +97,7 @@ EOF
     data="deviceId=$deviceId&netWay=Wifi&reqtime=$(date +%s)$(shuf -i 100-999 -n 1)&flushkey=1&version=android%40${unicom_version}&deviceModel=MI%209&token_online=$(cat $workdir/token_online | grep -oE "token_online\":\"[^\"]*" | cut -f3 -d\")&appId=$appId&deviceBrand=Xiaomi&deviceCode=$deviceId"
     curl -m 10 -X POST -sA "$UA" -b $workdir/cookie -c $workdir/cookie --data "$data" https://m.client.10010.com/mobileService/onLine.htm >$workdir/token_online
     cat $workdir/token_online | grep -qE "token_online" && status=0 || status=1
-    [[ $status == 0 ]] && echo && echo $(date) cookies登录${username:0:2}******${username:9}成功
+    [[ $status == 0 ]] && echo && echo $(date) cookies登录${username:0:2}******${username:8}成功
     
     # 账号密码登录
     if [[ $status == 1 ]]; then
@@ -105,8 +105,8 @@ EOF
         curl -m 10 -X POST -sA "$UA" -c $workdir/cookie "https://m.client.10010.com/mobileService/logout.htm?&desmobile=$username&version=android%40$unicom_version" >/dev/null
         curl -m 10 -sA "$UA" -b $workdir/cookie -c $workdir/cookie -d @$workdir/signdata "https://m.client.10010.com/mobileService/login.htm" >$workdir/token_online
         token=$(cat $workdir/cookie | grep -E "a_token" | awk  '{print $7}')
-        [[ "$token" = "" ]] && echo && echo $(date) ${username:0:2}******${username:9} Login Failed. && rm -rf $workdir && return 1
-        echo && echo $(date) 密码登录${username:0:2}******${username:9}成功
+        [[ "$token" = "" ]] && echo && echo $(date) ${username:0:2}******${username:8} Login Failed. && rm -rf $workdir && return 1
+        echo && echo $(date) 密码登录${username:0:2}******${username:8}成功
     fi
 }
 
@@ -193,7 +193,7 @@ function membercenter() {
     
     # 每日领100定向积分
     echo && echo
-    curl -m 10 -X POST -sA "$UA" -b $workdir/cookie --data "from=$(shuf -i 12345678901-98765432101 -n 1)" https://m.client.10010.com/welfare-mall-front/mobile/integral/gettheintegral/v1
+    curl -m 10 -X POST -sA "$UA" -b $workdir/cookie --data "from=98880000020" https://m.client.10010.com/welfare-mall-front/mobile/integral/gettheintegral/v1
     
     # 游戏签到积分 每日1积分
     echo && echo
@@ -205,11 +205,11 @@ function membercenter() {
     
     # 游戏宝箱
     echo && echo
-    curl -m 10 -X POST -sA "$UA" -b $workdir/cookie --data "methodType=reward&deviceType=Android&clientVersion=$unicom_version&isVideo=N" https://m.client.10010.com/game_box; sleep 3
+    curl -m 10 -X POST -sA "$UA" -b $workdir/cookie --data "methodType=reward&deviceType=Android&clientVersion=$unicom_version&isVideo=N" https://m.client.10010.com/game_box
     echo && echo
-    curl -m 10 -sA "$UA" -b $workdir/cookie --data "methodType=taskGetReward&taskCenterId=187&clientVersion=$unicom_version&deviceType=Android" https://m.client.10010.com/producGameTaskCenter; sleep 3
+    curl -m 10 -sA "$UA" -b $workdir/cookie --data "methodType=taskGetReward&taskCenterId=187&clientVersion=$unicom_version&deviceType=Android" https://m.client.10010.com/producGameTaskCenter
     echo && echo
-    curl -m 10 -X POST -sA "$UA" -b $workdir/cookie --data "methodType=reward&deviceType=Android&clientVersion=$unicom_version&isVideo=Y" https://m.client.10010.com/game_box; sleep 3
+    curl -m 10 -X POST -sA "$UA" -b $workdir/cookie --data "methodType=reward&deviceType=Android&clientVersion=$unicom_version&isVideo=Y" https://m.client.10010.com/game_box
     
     # 沃之树浇水，免费一次，服务器经常502错误，所以请求三次
     echo && echo
@@ -221,12 +221,6 @@ function membercenter() {
         curl -m 10 -X POST -sA "$UA" -b $workdir/cookie --data "stepflag=22" https://act.10010.com/SigninApp/mySignin/addFlow >/dev/null; sleep 3
         curl -m 10 -X POST -sA "$UA" -b $workdir/cookie --data "stepflag=23" https://act.10010.com/SigninApp/mySignin/addFlow | grep -oE "reason\":\"01" && break
     done
-
-    if [ $u == $((${#all_username_password[*]}-1)) ]; then
-            break
-        else
-            sleep 70
-    fi
 }
 
 function liulactive() {
@@ -261,6 +255,7 @@ function liulactive() {
         fi
         # 我的礼包-流量包-1G日包对应activeCode为73或者2534,当参数mygiftbag存在时运行: liulactive@d@ff80808166c5ee6701676ce21fd14716@13012341234@mygiftbag
         if [[ "$mygiftbag" != "" ]]; then
+            sleep 120
             curl -m 10 -X POST -sA "$UA"  -b $workdir/cookie --data "typeScreenCondition=2&category=FFLOWPACKET&pageSign=1&CALLBACKURL=https%3A%2F%2Fm.client.10010.com%2FmyPrizeForActivity%2Fquerywinninglist.htm" http://m.client.10010.com/myPrizeForActivity/mygiftbag.htm >$workdir/libaollactive.log
             endtimeliststemp=($(cat $workdir/libaollactive.log | grep -A 50 -E "'(73|2534)','[a-zA-Z0-9]+" | grep -E "(onclick|boxBG_footer_leftTime)" | grep -oE "20[0-9]{2}-[0-9]{2}-[0-9]{2}" | sed "1~2d" | tr "\n" " "))
             endtimelistsince=($(for endtime in ${endtimeliststemp[*]}; do date -d "$endtime 23:59:59" +"%s"; done | tr "\n" " "))
@@ -309,28 +304,39 @@ function jifeninfo() {
     # 积分信息显示，需传入参数 jifeninfo
     echo ${all_parameter[*]} | grep -qE "jifeninfo" || return 0
     echo && echo starting jifeninfo...
-    curl -m 10 -X POST -sA "$UA" -b $workdir/cookie --data "reqsn=&reqtime=&cliver=&reqdata=" "https://m.client.10010.com/welfare-mall-front/mobile/show/queryUserTotalScore/v1" >$workdir/jifeninfo.log1 
-    curl -m 10 -X POST -sA "$UA" -b $workdir/cookie --data "reqsn=&reqtime=&cliver=&reqdata=" "https://m.client.10010.com/welfare-mall-front/mobile/show/flDetail/v1/0" >$workdir/jifeninfo.log2
-    #
-    unset total invalid canUse availablescore invalidscore addScore todayscore yesterdayscore
-    total=$(cat $workdir/jifeninfo.log1 | grep -oE "total\":[0-9]+" | grep -oE "[0-9]+")
-    invalid=$(cat $workdir/jifeninfo.log1 | grep -oE "invalid\":[0-9]+" | grep -oE "[0-9]+")
-    canUse=$(cat $workdir/jifeninfo.log1 | grep -oE "canUse\":[0-9]+" | grep -oE "[0-9]+")
-    #
-    availablescore=$(cat $workdir/jifeninfo.log2 | grep -oE "availablescore\":\"[0-9]+" | grep -oE "[0-9]+")
-    invalidscore=$(cat $workdir/jifeninfo.log2 | grep -oE "invalidscore\":\"[0-9]+" | grep -oE "[0-9]+")
-    addScore=$(cat $workdir/jifeninfo.log2 | grep -oE "addScore\":\"[0-9]+" | grep -oE "[0-9]+")
-    decrScore=$(cat $workdir/jifeninfo.log2 | grep -oE "decrScore\":\"[0-9]+" | grep -oE "[0-9]+")
+    # 通信 奖励 定向 积分
+    for ((i = 0; i < 5; i++)); do
+        curl -m 10 -X POST -sA "$UA" -b $workdir/cookie "https://m.client.10010.com/welfare-mall-front/mobile/show/bj2205/v2/Y" >$workdir/jifeninfo.log
+        cat $workdir/jifeninfo.log | grep -qE "查询成功" && break || sleep 1
+    done
+    jfnumber=($(cat $workdir/jifeninfo.log | grep -oE "number\":\"[0-9]+" | grep -oE "[0-9]+" | tr "\n" " "))
+    jfname=($(cat $workdir/jifeninfo.log | grep -oE "name\":\"[^\"]+" | cut -d\" -f3 | tr "\n" " "))
+    # 总积分和将过期积分
+    for ((i = 0; i < 5; i++)); do
+        curl -m 10 -X POST -sA "$UA" -b $workdir/cookie --data "reqsn=&reqtime=&cliver=&reqdata=" "https://m.client.10010.com/welfare-mall-front/mobile/show/queryUserTotalScore/v1" >$workdir/jifeninfo.log
+        cat $workdir/jifeninfo.log | grep -qE "查询成功" && break || sleep 1
+    done
+    invalid=$(cat $workdir/jifeninfo.log | grep -oE "invalid\":[0-9]+" | grep -oE "[0-9]+")
+    canUse=$(cat $workdir/jifeninfo.log | grep -oE "canUse\":[0-9]+" | grep -oE "[0-9]+")
+    # 奖励积分详情
+    for ((i = 0; i < 5; i++)); do
+        curl -m 10 -X POST -sA "$UA" -b $workdir/cookie --data "reqsn=&reqtime=&cliver=&reqdata=" "https://m.client.10010.com/welfare-mall-front/mobile/show/flDetail/v1/0" >$workdir/jifeninfo.log
+        cat $workdir/jifeninfo.log | grep -qE "查询成功" && break || sleep 1
+    done
+    availablescore=$(cat $workdir/jifeninfo.log | grep -oE "availablescore\":\"[0-9]+" | grep -oE "[0-9]+")
+    invalidscore=$(cat $workdir/jifeninfo.log | grep -oE "invalidscore\":\"[0-9]+" | grep -oE "[0-9]+")
+    addScore=$(cat $workdir/jifeninfo.log | grep -oE "addScore\":\"[0-9]+" | grep -oE "[0-9]+")
+    decrScore=$(cat $workdir/jifeninfo.log | grep -oE "decrScore\":\"[0-9]+" | grep -oE "[0-9]+")
     # 今日奖励积分
     today="$(date +%Y-%m-%d)" && todayscore=0
-    todayscorelist=($(cat $workdir/jifeninfo.log2 | grep -oE "createTime\":\"$today[^}]*" | grep 'books_oper_type":"0"' | grep -oE "books_number\":[0-9]+" | grep -oE "[0-9]+" | tr "\n" " "))
+    todayscorelist=($(cat $workdir/jifeninfo.log | grep -oE "createTime\":\"$today[^}]*" | grep 'books_oper_type":"0"' | grep -oE "books_number\":[0-9]+" | grep -oE "[0-9]+" | tr "\n" " "))
     for ((i = 0; i < ${#todayscorelist[*]}; i++)); do todayscore=$((todayscore+todayscorelist[i])); done
     # 昨日奖励积分
     yesterday="$(date -d "1 days ago" +%Y-%m-%d)" && yesterdayscore=0
-    yesterdayscorelist=($(cat $workdir/jifeninfo.log2 | grep -oE "createTime\":\"$yesterday[^}]*" | grep 'books_oper_type":"0"' | grep -oE "books_number\":[0-9]+" | grep -oE "[0-9]+" | tr "\n" " "))
+    yesterdayscorelist=($(cat $workdir/jifeninfo.log | grep -oE "createTime\":\"$yesterday[^}]*" | grep 'books_oper_type":"0"' | grep -oE "books_number\":[0-9]+" | grep -oE "[0-9]+" | tr "\n" " "))
     for ((i = 0; i < ${#yesterdayscorelist[*]}; i++)); do yesterdayscore=$((yesterdayscore+yesterdayscorelist[i])); done
     # info
-    echo $(echo ${username:0:2}******${username:9}) 总积分:$total 本月将过期积分:$invalid 可用积分:$canUse 奖励积分:$availablescore 本月将过期奖励积分:$invalidscore 本月新增奖励积分:$addScore 本月消耗奖励积分:$decrScore 昨日奖励积分:$yesterdayscore 今日奖励积分:$todayscore
+    echo $(echo ${username:0:2}******${username:8}) 总积分-$canUse 通信积分-${jfnumber[0]} 奖励积分-${jfnumber[1]} 定向积分-${jfnumber[2]} 本月将过期积分:$invalid 本月将过期奖励积分:$invalidscore 本月新增奖励积分:$addScore 本月消耗奖励积分:$decrScore 昨日奖励积分:$yesterdayscore 今日奖励积分:$todayscore
 }
 
 function otherinfo() {
@@ -376,14 +382,14 @@ function formatsendinfo() {
     if $(echo ${all_parameter[*]} | grep -qE "sendsimple"); then
         echo ${userlogin_ook[u]} ${#userlogin_ook[*]} Accomplished. ${userlogin_err[u]} ${#userlogin_err[*]} Failed. >$formatsendinfo_file
         echo ${all_parameter[*]} | grep -qE "otherinfo"     && echo 可用余额:$curntbalancecust 实时话费:$realfeecust >>$formatsendinfo_file
-        echo ${all_parameter[*]} | grep -qE "jifeninfo"     && echo 积分:$total-$availablescore-$todayscore >>$formatsendinfo_file
+        echo ${all_parameter[*]} | grep -qE "jifeninfo"     && echo 总积分-$canUse 通信积分-${jfnumber[0]} 奖励积分-${jfnumber[1]} 定向积分-${jfnumber[2]} 今日奖励积分:$todayscore >>$formatsendinfo_file
         echo ${all_parameter[*]} | grep -qE "hfgoactive"    && echo 话费购奖品: $(cat $workdir/hfgoactive.info | tail -n +2) >>$formatsendinfo_file
         echo ${all_parameter[*]} | grep -qE "freescoregift" && echo 定向积分免费商品数量:$(cat $workdir/freescoregift.info | tail -n +3 | grep -cv '^$') >>$formatsendinfo_file
         echo ${all_parameter[*]} | grep -qE "liulactive" && [[ -f $workdir/liulactive.info ]] && [[ $(cat $workdir/liulactive.info) != "" ]] && echo 流量激活: $(cat $workdir/liulactive.info) >>$formatsendinfo_file
     else
         echo ${userlogin_err[u]} ${#userlogin_err[*]} Failed. ${userlogin_ook[u]} ${#userlogin_ook[*]} Accomplished. >$formatsendinfo_file
         echo ${all_parameter[*]} | grep -qE "otherinfo" && cat $workdir/otherinfo.info >>$formatsendinfo_file
-        echo ${all_parameter[*]} | grep -qE "jifeninfo" && echo $(echo ${username:0:2}******${username:9}) 总积分:$total 本月将过期积分:$invalid 可用积分:$canUse 奖励积分:$availablescore 本月将过期奖励积分:$invalidscore 本月新增奖励积分:$addScore 本月消耗奖励积分:$decrScore 昨日奖励积分:$yesterdayscore 今日奖励积分:$todayscore >>$formatsendinfo_file
+        echo ${all_parameter[*]} | grep -qE "jifeninfo" && echo $(echo ${username:0:2}******${username:8}) 总积分-$canUse 通信积分-${jfnumber[0]} 奖励积分-${jfnumber[1]} 定向积分-${jfnumber[2]} 本月将过期积分:$invalid 本月将过期奖励积分:$invalidscore 本月新增奖励积分:$addScore 本月消耗奖励积分:$decrScore 昨日奖励积分:$yesterdayscore 今日奖励积分:$todayscore >>$formatsendinfo_file
         echo ${all_parameter[*]} | grep -qE "hfgoactive" && cat $workdir/hfgoactive.info >>$formatsendinfo_file
         [[ $u == $((${#all_username_password[*]}-1)) ]] && echo ${all_parameter[*]} | grep -qE "freescoregift" && cat $workdir/freescoregift.info >>$formatsendinfo_file
         echo ${all_parameter[*]} | grep -qE "liulactive" && [[ -f $workdir/liulactive.info ]] && [[ $(cat $workdir/liulactive.info) != "" ]] && echo 流量激活: $(cat $workdir/liulactive.info) >>$formatsendinfo_file
@@ -396,21 +402,21 @@ function telegrambot() {
     echo ${all_parameter[*]} | grep -qE "token@[a-zA-Z0-9:_-]+" && token="$(echo ${all_parameter[*]} | grep -oE "token@[a-zA-Z0-9:_-]+" | cut -f2 -d@)" || return 0
     echo ${all_parameter[*]} | grep -qE "chat_id@[0-9-]+" && chat_id="$(echo ${all_parameter[*]} | grep -oE "chat_id@[0-9-]+" | cut -f2 -d@)" || return 0
     echo && echo starting telegrambot...
-    curl -m 10 -sX POST "https://api.telegram.org/bot$token/sendMessage" -d "chat_id=$chat_id&text=$(cat $formatsendinfo_file)" >/dev/null;
+    curl -m 10 -sX POST "https://api.telegram.org/bot$token/sendMessage" -d "chat_id=$chat_id&text=$(cat $formatsendinfo_file)" >/dev/null
 }
 
 function serverchan() {
     # serverchan旧版通知消息: sckey@************
     echo ${all_parameter[*]} | grep -qE "sckey@[a-zA-Z0-9:_-]+" && sckey="$(echo ${all_parameter[*]} | grep -oE "sckey@[a-zA-Z0-9:_-]+" | cut -f2 -d@)" || return 0
     echo && echo starting serverchan...
-    curl -m 10 -sX POST "https://sc.ftqq.com/$sckey.send" -d "text=$(cat $formatsendinfo_file)" >/dev/null;
+    curl -m 10 -sX POST "https://sc.ftqq.com/$sckey.send" -d "text=$(cat $formatsendinfo_file)" >/dev/null
 }
 
 function bark() {
     # bark通知消息: bark@************;bark推送不编码有换行推送不了，用tr空格替换了,推送效果极差
     echo ${all_parameter[*]} | grep -qE "bark@[a-zA-Z0-9:_-]+" && bark="$(echo ${all_parameter[*]} | grep -oE "bark@[a-zA-Z0-9:_-]+" | cut -f2 -d@)" || return 0
     echo && echo starting bark...
-    curl -m 10 -sX POST "https://api.day.app/$bark/$(cat $formatsendinfo_file | tr "\n" " ")" >/dev/null;
+    curl -m 10 -sX POST "https://api.day.app/$bark/$(cat $formatsendinfo_file | tr "\n" " ")" >/dev/null
 }
 
 function main() {
@@ -419,7 +425,7 @@ function main() {
         username=${all_username_password[u]%@*} && password=${all_username_password[u]#*@}
         UA="Mozilla/5.0 (Linux; Android 11; MI 9 Build/RKQ1.200826.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/87.0.4280.141 Mobile Safari/537.36; unicom{version:android@$unicom_version,desmobile:$username};devicetype{deviceBrand:Xiaomi,deviceModel:MI 9}"
         workdir="${workdirbase}_${username}" && [[ ! -d "$workdir" ]] && mkdir -p $workdir
-        userlogin && userlogin_ook[u]=$(echo ${username:0:2}******${username:9}) || { userlogin_err[u]=$(echo ${username:0:2}******${username:9}); continue; }
+        userlogin && userlogin_ook[u]=$(echo ${username:0:2}******${username:8}) || { userlogin_err[u]=$(echo ${username:0:2}******${username:8}); continue; }
         membercenter
         liulactive
         hfgoactive
