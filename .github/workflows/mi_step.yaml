@@ -30,8 +30,8 @@ jobs:
           cd mistep
           pip install requests
           
-          pmode=off
-          pkey='${{ secrets.PKEY }}'
+          pmode='${{ secrets.MI_MODE }}'
+          pkey='${{ secrets.SCKEY }}'
           user='${{ secrets.MI_USER }}'
           pwd='${{ secrets.MI_PWD }}'
           step='${{ secrets.MI_STEP }}'
